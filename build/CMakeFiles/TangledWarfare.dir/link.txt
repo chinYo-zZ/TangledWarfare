@@ -1,0 +1,3 @@
+"D:\Program Files\cmake\bin\cmake.exe" -E rm -f CMakeFiles\TangledWarfare.dir/objects.a
+"D:\Program Files\mingw64\bin\ar.exe" qc CMakeFiles\TangledWarfare.dir/objects.a @CMakeFiles\TangledWarfare.dir\objects1.rsp
+"D:\Program Files\mingw64\bin\g++.exe" -mwindows -g -Wl,--whole-archive CMakeFiles\TangledWarfare.dir/objects.a -Wl,--no-whole-archive -o TangledWarfare.exe -Wl,--out-implib,libTangledWarfare.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TangledWarfare.dir\linkLibs.rsp

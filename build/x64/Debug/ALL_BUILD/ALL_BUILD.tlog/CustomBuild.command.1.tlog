@@ -1,0 +1,10 @@
+^C:\USERS\WE596\DOCUMENTS\CPP PROJECT\TANGLEDWARFARE\CMAKELISTS.TXT
+setlocal
+"D:\Program Files\cmake\bin\cmake.exe" "-SC:/Users/we596/Documents/CPP Project/TangledWarfare" "-BC:/Users/we596/Documents/CPP Project/TangledWarfare/build" --check-stamp-file "C:/Users/we596/Documents/CPP Project/TangledWarfare/build/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
