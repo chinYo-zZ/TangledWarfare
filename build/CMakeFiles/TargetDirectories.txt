@@ -1,3 +1,0 @@
-C:/Users/we596/Documents/CPP Project/TangledWarfare/build/CMakeFiles/TangledWarfare.dir
-C:/Users/we596/Documents/CPP Project/TangledWarfare/build/CMakeFiles/edit_cache.dir
-C:/Users/we596/Documents/CPP Project/TangledWarfare/build/CMakeFiles/rebuild_cache.dir
