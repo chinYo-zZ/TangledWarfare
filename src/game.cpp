@@ -28,6 +28,7 @@ void Game::Init()
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
     ResourceManager::LoadTexture("../resources/avatar_sunflower.png", GL_TRUE, "avatar_sunflower");
+    ResourceManager::LoadTexture("../resources/menu_background.png",GL_TRUE,"menu_background");
     // Set render-specific controls
     Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
 }
@@ -44,5 +45,7 @@ void Game::ProcessInput(GLfloat dt)
 
 void Game::Render()
 {
-    Renderer->DrawSprite(ResourceManager::GetTexture("avatar_sunflower"), glm::vec2(0, 0), glm::vec2(300, 300), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    Renderer->DrawSprite(ResourceManager::GetTexture("menu_background"), glm::vec2(0, 0), glm::vec2(1920, 1080), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+    Renderer->DrawSprite(ResourceManager::GetTexture("avatar_sunflower"), glm::vec2(0, 0), glm::vec2(100, 100), 0.0f, glm::vec3(1.0f, 1.0f, 1.0f));
+
 }
