@@ -14,19 +14,11 @@
 #include "camera.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 // settings
 const unsigned int SCR_WIDTH = 1920;
 const unsigned int SCR_HEIGHT = 1080;
-
-Scene *menu_scene = nullptr;
-Scene *game_scene = nullptr;
-Scene *selector_scene = nullptr;
-
-Camera MainCamera;  
-
-SceneManager scene_manager;
 
 Game GameInstance(SCR_WIDTH,SCR_HEIGHT);
 
@@ -55,15 +47,13 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }    
+    glfwSetKeyCallback(window, key_callback);
+
     glViewport(0, 0, SCR_WIDTH, SCR_HEIGHT);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // -----------------------------------------------------------------------
-    menu_scene = new MenuScene();
-	game_scene = new GameScene();
-	selector_scene = new SelectorScene();
-
-	scene_manager.SetCurrentScene(menu_scene);
+    
 
     GameInstance.Init();
 
@@ -72,15 +62,14 @@ int main()
         auto frame_start_time = std::chrono::high_resolution_clock::now();
         glfwPollEvents();
 
-		processInput(window);
-
 		static auto last_tick_time = std::chrono::high_resolution_clock::now();
 		auto current_tick_time = std::chrono::high_resolution_clock::now();
 		std::chrono::duration<double> delta_tick = current_tick_time - last_tick_time;
 		auto delta_tick_ms = std::chrono::duration_cast<std::chrono::milliseconds>(delta_tick).count();
         
-		scene_manager.on_update(delta_tick_ms);
+		GameInstance.ProcessInput(delta_tick_ms);
 
+        GameInstance.Update(delta_tick_ms);
 		last_tick_time = current_tick_time;
         
 
@@ -116,10 +105,18 @@ int main()
 
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+    // When a user presses the escape key, we set the WindowShouldClose property to true, closing the application
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, GL_TRUE);
+    if (key >= 0 && key < 1024)
+    {
+        if (action == GLFW_PRESS)
+            GameInstance.Keys[key] = GL_TRUE;
+        else if (action == GLFW_RELEASE)
+            GameInstance.Keys[key] = GL_FALSE;
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes

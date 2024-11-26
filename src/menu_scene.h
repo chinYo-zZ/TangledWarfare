@@ -7,15 +7,15 @@ class SpriteRenderer;
 class MenuScene : public Scene
 {
 public:
-	MenuScene() = default;
+	MenuScene();
+	MenuScene(glm::vec2 size, Texture2D sprite);
 	~MenuScene() = default;
 
 	void on_enter() override;
 	void on_update(int delta) override;
-	void on_draw(const Camera& camera) override;
-	void on_input() override;
+	void on_draw(SpriteRenderer& renderer) override;
+	void on_input(GLboolean (&Keys)[1024]) override;
 	void on_exit() override;
 
 private:
-	SpriteRenderer* MenuRender;
 };

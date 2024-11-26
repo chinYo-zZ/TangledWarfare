@@ -21,8 +21,8 @@ public:
 	void SwitchTo(SceneType type);
 
 	void on_update(int delta);
-	void on_draw(const Camera& camera);
-	void on_input();
+	void on_draw(SpriteRenderer &renderer);
+	void on_input(GLboolean (&Keys)[1024]);
 
 private:
 	Scene *CurrentScene = nullptr;

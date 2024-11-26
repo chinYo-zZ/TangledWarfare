@@ -24,7 +24,7 @@ public:
     // Initialize game state (load all shaders/textures/levels)
     void Init();
     // GameLoop
-    void ProcessInput(GLfloat dt);
-    void Update(GLfloat dt);
+    void ProcessInput(GLuint dt);
+    void Update(GLuint dt);
     void Render();
 };

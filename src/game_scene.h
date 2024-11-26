@@ -10,6 +10,6 @@ public:
 
 	void on_enter() override;
 	void on_update(int delta) override;
-	void on_draw(const Camera& camera) override;
+	void on_draw(SpriteRenderer &renderer) override;
 private:
 };

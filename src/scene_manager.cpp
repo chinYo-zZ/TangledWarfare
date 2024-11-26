@@ -1,4 +1,5 @@
 #include "scene_manager.h"
+#include "sprite_renderer.h"
 
 extern Scene *menu_scene;
 extern Scene *game_scene;
@@ -35,12 +36,12 @@ void SceneManager::on_update(int delta)
 	CurrentScene->on_update(delta);
 }
 
-void SceneManager::on_draw(const Camera& camera)
+void SceneManager::on_draw(SpriteRenderer &renderer)
 {
-	CurrentScene->on_draw(camera);
+	CurrentScene->on_draw(renderer);
 }
 
-void SceneManager::on_input()
+void SceneManager::on_input(GLboolean (&Keys)[1024])
 {
-	CurrentScene->on_input();
+	CurrentScene->on_input(Keys);
 }

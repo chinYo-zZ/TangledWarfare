@@ -8,6 +8,6 @@ void GameScene::on_update(int delta)
 {
 }
 
-void GameScene::on_draw(const Camera &camera)
+void GameScene::on_draw(SpriteRenderer &renderer)
 {
 }

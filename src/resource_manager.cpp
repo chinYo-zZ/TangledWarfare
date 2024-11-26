@@ -8,12 +8,29 @@
 
 #include <stb_image.h>
 
+#define MINIAUDIO_IMPLEMENTATION
+
+#include <miniaudio.h>
+
+
 // Instantiate static variables
 std::map<std::string, Texture2D>    ResourceManager::Textures;
 std::map<std::string, Shader>       ResourceManager::Shaders;
+std::map<std::string, ma_sound>     ResourceManager::Sounds;
 
+ma_engine SoundEngine;
 
-Shader ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
+void ResourceManager::InitResourceManager()
+{
+    ma_result result;
+
+    result = ma_engine_init(NULL, &SoundEngine);
+    if (result != MA_SUCCESS) {
+
+    }
+}
+
+Shader &ResourceManager::LoadShader(const GLchar *vShaderFile, const GLchar *fShaderFile, const GLchar *gShaderFile, std::string name)
 {
     Shaders[name] = loadShaderFromFile(vShaderFile, fShaderFile, gShaderFile);
     return Shaders[name];
@@ -24,7 +41,7 @@ Shader& ResourceManager::GetShader(std::string name)
     return Shaders[name];
 }
 
-Texture2D ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std::string name)
+Texture2D& ResourceManager::LoadTexture(const GLchar *file, GLboolean alpha, std::string name)
 {
     Textures[name] = loadTextureFromFile(file, alpha);
     return Textures[name];
@@ -117,4 +134,16 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
     // And finally free image data
     stbi_image_free(image);
     return texture;
+}
+
+ma_sound ResourceManager::loadSoundFromFile(const GLchar *file)
+{
+    ma_result result;
+    ma_sound sound;
+
+    result = ma_sound_init_from_file(&SoundEngine, file, 0, NULL, NULL, &sound);
+    if (result != MA_SUCCESS) {
+
+    }
+    return sound;
 }

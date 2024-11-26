@@ -63,3 +63,8 @@ void Animation::SetCallBack(std::function<void()> callback)
 {
 	this->callback = callback;
 }
+
+void Animation::Draw(SpriteRenderer &renderer)
+{
+    renderer.DrawSprite(*GetFrame(), this->Position, this->Size, this->Rotation, this->Color);
+}
